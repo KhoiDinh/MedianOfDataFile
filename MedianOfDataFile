@@ -1,0 +1,59 @@
+// Inputs: sample.txt (2 different versions, 1 has odd amount of value and the other has an even amount of values)
+//Outputs:median
+// Reads in a data file finds the median
+
+#include "stdafx.h" // Only for Microsoft Visual Studio
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	//sets up the variables and assigns them equal to values
+		ifstream read;
+		double line_size[100];
+		double median;
+		int number;
+		
+		int increment = 1;
+	// reads in file		
+		read.open("sample.txt");
+	//messages output if file doesnt open
+			if (read.fail())
+			{
+				cout << "read file opening failed. \n";
+					exit(1);
+			}
+			
+	// keeps track of the nuber of values in file
+		    while (increment < 100 && read >> line_size[increment]) 
+			{
+
+				increment++;
+			}
+	
+			increment = increment - 1;
+			// determines which condition is used to find median depending on amount of number
+			if ((increment % 2) == 1)
+			{
+					increment = ((increment - 1) / 2) + 1;
+					median = line_size[increment];
+			}
+			else
+			{
+				increment = increment / 2;
+				median = ((line_size[increment + 1] + line_size[increment]) / 2);
+			}
+			//prints out the median
+			cout << "The median is: " << median << endl;
+			//closes file
+			read.close();
+			return 0;
+}
+
+
+
+
+
+
+
